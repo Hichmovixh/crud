@@ -7,12 +7,12 @@
  * PHP version 7
  */
 namespace App\Controller;
-use App\Model\SizeManager;
+use App\Model\PictureManager;
 /**
- * Class SizeController
+ * Class PictureController
  *
  */
-class SizeController extends AbstractController
+class PictureController extends AbstractController
 {
     /**
      * Display picture listing
@@ -24,8 +24,8 @@ class SizeController extends AbstractController
      */
     public function index()
     {
-        $sizeManager = new SizeManager();
-        $pictures = $sizeManager->selectAll();
+        $pictureManager = new PictureManager();
+        $pictures = $pictureManager->selectAll();
         return $this->twig->render('Picture/index.html.twig', ['pictures' => $pictures]);
     }
     /**
@@ -39,8 +39,8 @@ class SizeController extends AbstractController
      */
     public function show(int $id)
     {
-        $sizeManager = new SizeManager();
-        $picture = $sizeManager->selectOneById($id);
+        $pictureManager = new PictureManager();
+        $picture = $pictureManager->selectOneById($id);
         return $this->twig->render('Picture/show.html.twig', ['picture' => $picture]);
     }
     /**
@@ -54,8 +54,8 @@ class SizeController extends AbstractController
      */
     public function edit(int $id): string
     {
-        $sizeManager = new SizeManager();
-        $picture = $sizeManager->selectOneById($id);
+        $pictureManager = new PictureManager();
+        $picture = $pictureManager->selectOneById($id);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $picture['number'] = $_POST['number'];
             $pictureManager->update($picture);
@@ -77,7 +77,7 @@ class SizeController extends AbstractController
             $picture = [
                 'number' => $_POST['number'],
             ];
-            $id = $sizeManager->insert($picture);
+            $id = $pictureManager->insert($picture);
             header('Location:/picture/show/' . $id);
         }
         return $this->twig->render('Picture/add.html.twig');
@@ -89,7 +89,7 @@ class SizeController extends AbstractController
      */
     public function delete(int $id)
     {
-        $sizeManager = new SizeManager();
-        $sizeManager->delete($id);
+        $pictureManager = new PictureManager();
+        $pictureManager->delete($id);
         header('Location:/picture/index');
     }
