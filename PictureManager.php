@@ -5,7 +5,7 @@ namespace App\Model;
 /**
  *
  */
-class SizeManager extends AbstractManager
+class PictureManager extends AbstractManager
 {
     /**
      *
